@@ -70,7 +70,23 @@ open class ActionButton: NSObject {
     /// Blur effect that will be presented when the button is active
     fileprivate var blurVisualEffect: UIVisualEffectView!
 
-    open var blurEffect : Bool = true
+    open var blurEffect : Bool = true {
+        didSet {
+            self.blurEffect = newValue
+
+            if self.blurEffect {
+                self.blurVisualEffect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+                self.blurVisualEffect.frame = self.contentView.frame
+                self.contentView.addSubview(self.blurVisualEffect)
+            } else {
+                guard blurVisualEffect else {
+                    return
+                }
+                blurVisualEffect.removeFromSuperview
+            }
+        }
+    }
+
 
     // Distance between each item action
     fileprivate let itemOffset = -55

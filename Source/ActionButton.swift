@@ -68,7 +68,7 @@ open class ActionButton: NSObject {
     fileprivate var parentView: UIView!
     
     /// Blur effect that will be presented when the button is active
-    var blurVisualEffect: UIVisualEffectView!
+    open var blurVisualEffect: UIVisualEffectView!
     
     // Distance between each item action
     fileprivate let itemOffset = -55
@@ -245,11 +245,11 @@ open class ActionButton: NSObject {
         }
     }
     
-    func showBlur() {
+    open func showBlur() {
         self.parentView.insertSubview(self.contentView, belowSubview: self.floatButton)
     }
     
-    func hideBlur() {
+    open func hideBlur() {
         self.contentView.removeFromSuperview()
     }
     

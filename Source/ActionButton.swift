@@ -68,8 +68,10 @@ open class ActionButton: NSObject {
     fileprivate var parentView: UIView!
     
     /// Blur effect that will be presented when the button is active
-    open var blurVisualEffect: UIVisualEffectView!
-    
+    fileprivate var blurVisualEffect: UIVisualEffectView!
+
+    open var blurEffect : Bool = true
+
     // Distance between each item action
     fileprivate let itemOffset = -55
     
@@ -104,8 +106,11 @@ open class ActionButton: NSObject {
         self.contentView = UIView(frame: bounds)
         self.blurVisualEffect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         self.blurVisualEffect.frame = self.contentView.frame
-        self.contentView.addSubview(self.blurVisualEffect)
-        
+
+        if blurEffect {
+            self.contentView.addSubview(self.blurVisualEffect)
+        }
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(ActionButton.backgroundTapped(_:)))
         self.contentView.addGestureRecognizer(tap)
         
@@ -245,12 +250,16 @@ open class ActionButton: NSObject {
         }
     }
     
-    open func showBlur() {
+    fileprivate func showBlur() {
+        if blurEffect {
         self.parentView.insertSubview(self.contentView, belowSubview: self.floatButton)
+        }
     }
     
-    open func hideBlur() {
+    fileprivate func hideBlur() {
+        if blurEffect {
         self.contentView.removeFromSuperview()
+        }
     }
     
     /**

@@ -72,20 +72,20 @@ open class ActionButton: NSObject {
 
     open var blurEffect : Bool = true {
         didSet {
-            self.blurEffect = newValue
 
             if self.blurEffect {
                 self.blurVisualEffect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
                 self.blurVisualEffect.frame = self.contentView.frame
                 self.contentView.addSubview(self.blurVisualEffect)
             } else {
-                guard blurVisualEffect else {
+                guard (self.blurVisualEffect != nil) else {
                     return
                 }
-                blurVisualEffect.removeFromSuperview
+                self.blurVisualEffect.removeFromSuperview()
             }
         }
     }
+
 
 
     // Distance between each item action

@@ -251,15 +251,11 @@ open class ActionButton: NSObject {
     }
     
     fileprivate func showBlur() {
-        if blurEffect {
         self.parentView.insertSubview(self.contentView, belowSubview: self.floatButton)
-        }
     }
     
     fileprivate func hideBlur() {
-        if blurEffect {
         self.contentView.removeFromSuperview()
-        }
     }
     
     /**
